@@ -4,6 +4,7 @@ import com.bankmanagement.bank_system.model.Customer;
 import com.bankmanagement.bank_system.repository.CustomerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.query.sqm.SemanticQueryWalker;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,5 +32,13 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer getCustomerById(Long id){
         return customerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Customer not found with id: " + id));
+    }
+
+
+
+    @Override
+    public Customer getCustomerByEmail(String email){
+        return customerRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Customer not found with email: "+ email));
     }
 }
