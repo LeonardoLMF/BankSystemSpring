@@ -5,6 +5,8 @@ import com.bankmanagement.bank_system.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService{
@@ -17,6 +19,11 @@ public class CustomerServiceImpl implements CustomerService{
             throw new IllegalArgumentException("Email already registered");
         }
         return customerRepository.save(customer);
+    }
+
+    @Override
+    public List<Customer> getAllCustomers(Customer customer){
+        return customerRepository.findAll();
     }
 
 }
