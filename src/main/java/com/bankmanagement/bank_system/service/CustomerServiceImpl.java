@@ -2,6 +2,7 @@ package com.bankmanagement.bank_system.service;
 
 import com.bankmanagement.bank_system.model.Customer;
 import com.bankmanagement.bank_system.repository.CustomerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +27,9 @@ public class CustomerServiceImpl implements CustomerService{
         return customerRepository.findAll();
     }
 
+    @Override
+    public Customer getCustomerById(Long id){
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Customer not found with id: " + id));
+    }
 }
